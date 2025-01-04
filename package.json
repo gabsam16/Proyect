@@ -16,5 +16,9 @@
     "Chiste"
   ],
   "author": "Gabriel Da Luz , Paola Ascanio, Zarah Roa",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
 }
