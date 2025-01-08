@@ -335,4 +335,17 @@ app.get('/chistes/:id', async (req, res) => {
     } 
 });
 
+//REQUERIMIENTO 6: Obtener la cantidad de chistes que hay en la base de datos por su categoría
+app.get('/chistes/categoria/:categoria', async (req, res) => { 
+    const categoria = req.params.categoria; 
+    try { 
+        const count = await Chiste.countDocuments({ categoria }); 
+        if (count === 0) { 
+            return res.status(404).json({ error: 'No se encontraron chistes para esta categoría' }); 
+        } res.json({ categoria, cantidad: count }); 
+    } catch (err) { 
+        res.status(500).json({error: 'Error al obtener la cantidad de chistes' }); 
+    } 
+});
+
 
