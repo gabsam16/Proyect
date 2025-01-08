@@ -334,3 +334,5 @@ app.get('/chistes/:id', async (req, res) => {
         res.status(500).json({ error: 'Error al buscar el chiste' }); 
     } 
 });
+
+
