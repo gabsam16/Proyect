@@ -16,6 +16,23 @@ app.use(cors({ origin: '*' }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false }));
 
+//Chiste de prueba
+const nuevoChiste = new Chiste({
+    texto: 'ejemplo_chiste',
+    puntaje: 10,
+    categoria: 'Chistoso'
+});
+
+nuevoChiste.save()
+    .then(doc => {
+        console.log('Chiste insertado:', doc);
+    })
+    .catch(err => {
+        console.error('Error al insertar chiste:', err);
+    });
+
+
+
 // Configuración de Swagger
 const swaggerDefinition = {
     openapi: '3.0.0',
@@ -303,4 +320,17 @@ app.delete('/chiste/:id', async (req, res) => {
     } catch (error) {
         res.status(500).send('Error al eliminar el chiste');
     }
+});
+
+//REQUERIMIENTO 5: Obtener chiste por su ID
+app.get('/chistes/:id', async (req, res) => { 
+    try { 
+        const chiste = await Chiste.findById(req.params.id); 
+        if (!chiste) { 
+            return res.status(404).json({ error: 'Chiste no encontrado' }); 
+        } 
+        res.status(200).json(chiste); 
+    } catch (error) { 
+        res.status(500).json({ error: 'Error al buscar el chiste' }); 
+    } 
 });
