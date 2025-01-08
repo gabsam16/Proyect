@@ -153,11 +153,11 @@ app.listen(port, function() {
  *           text/plain:
  *             schema:
  *               type: string
- *               example: "Mi primer chiste"
+ *               example: "Mi primer chiste PAOLA, GABRIEL Y ZARA"
  */
 app.get('/', (req, res) => {
     console.log('Mi primer endpoint');
-    res.status(200).send('Mi primer chiste');
+    res.status(200).send('Mi primer chiste PAOLA, GABRIEL Y ZARA');
 });
 
 // Endpoint para obtener un chiste
