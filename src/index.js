@@ -304,3 +304,21 @@ app.delete('/chiste/:id', async (req, res) => {
         res.status(500).send('Error al eliminar el chiste');
     }
 });
+
+// Endpoint para obtener todos los chistes por puntaje
+app.get('/chiste/:puntaje', async (req, res) => {
+    const { puntaje } = req.params;
+
+    try {
+        const chiste = await Chiste.find({ puntaje: parseInt(puntaje) }); // Busca chistes con el puntaje especificado
+
+        if (!chiste) {
+            return res.status(404).send('Chiste no encontrado');
+        }
+
+        res.status(200).json(chiste);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al obtener los chistes.');
+    }
+});
