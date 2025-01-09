@@ -336,7 +336,7 @@ app.get('/chiste/categoria/:categoria', async (req, res) => {
 });
 
 // Endpoint para obtener todos los chistes por puntaje
-app.get('/chiste', async (req, res) => {
+app.get('/chiste/puntaje/:puntaje', async (req, res) => {
     const { puntaje } = req.params;
 
     try {
