@@ -305,8 +305,44 @@ app.delete('/chiste/:id', async (req, res) => {
     }
 });
 
-//REQUERIMIENTO 5: Obtener chiste por su ID
 
+//REQUERIMIENTO 5: Obtener chiste por su ID
+/**
+ * @swagger
+ * /chiste/{id}:
+ *   get:
+ *     summary: Obtiene un chiste por su ID
+ *     description: Devuelve un chiste específico basado en su ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del chiste a obtener
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Chiste obtenido exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 texto:
+ *                   type: string
+ *                 autor:
+ *                   type: string
+ *                 puntaje:
+ *                   type: integer
+ *                 categoria:
+ *                   type: string
+ *       404:
+ *         description: Chiste no encontrado
+ *       500:
+ *         description: Error interno del servidor
+ */
 app.get('/chiste/:id', async (req, res) => {
     const id = req.params.id;
 
@@ -323,6 +359,36 @@ app.get('/chiste/:id', async (req, res) => {
 
 
 //REQUERIMIENTO 6: Obtener la cantidad de chistes que hay en la base de datos por su categoría
+/**
+ * @swagger
+ * /chiste/categoria/{categoria}:
+ *   get:
+ *     summary: Obtiene la cantidad de chistes por categoría
+ *     description: Devuelve la cantidad de chistes en la base de datos según la categoría especificada.
+ *     parameters:
+ *       - in: path
+ *         name: categoria
+ *         required: true
+ *         description: Categoría de los chistes a contar
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Cantidad de chistes obtenida exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 categoria:
+ *                   type: string
+ *                 cantidad:
+ *                   type: integer
+ *       404:
+ *         description: No se encontraron chistes para esta categoría
+ *       500:
+ *         description: Error interno del servidor
+ */
 app.get('/chiste/categoria/:categoria', async (req, res) => { 
     const categoria = req.params.categoria; 
     try { 
