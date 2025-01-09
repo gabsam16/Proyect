@@ -305,8 +305,38 @@ app.delete('/chiste/:id', async (req, res) => {
     }
 });
 
+//REQUERIMIENTO 5: Obtener chiste por su ID
+
+app.get('/chiste/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const chiste = await Chiste.findById(id);
+        if (!chiste) {
+            return res.status(404).send('Chiste no encontrado.');
+        }
+        res.status(200).json({ chiste: chiste.texto });
+    } catch (error) {
+        res.status(500).send('Error al obtener el chiste.');
+    }
+});
+
+
+//REQUERIMIENTO 6: Obtener la cantidad de chistes que hay en la base de datos por su categoría
+app.get('/chiste/categoria/:categoria', async (req, res) => { 
+    const categoria = req.params.categoria; 
+    try { 
+        const count = await Chiste.countDocuments({ categoria }); 
+        if (count === 0) { 
+            return res.status(404).json({ error: 'No se encontraron chistes para esta categoría' }); 
+        } res.json({ categoria, cantidad: count }); 
+    } catch (err) { 
+        res.status(500).json({error: 'Error al obtener la cantidad de chistes' }); 
+    } 
+});
+
 // Endpoint para obtener todos los chistes por puntaje
-app.get('/chiste/:puntaje', async (req, res) => {
+app.get('/chiste', async (req, res) => {
     const { puntaje } = req.params;
 
     try {
